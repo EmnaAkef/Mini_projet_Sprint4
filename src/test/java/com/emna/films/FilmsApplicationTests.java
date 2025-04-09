@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 
 import com.emna.films.entities.Film;
+import com.emna.films.entities.Genre;
 import com.emna.films.repos.FilmRepository;
 import com.emna.films.service.FilmService;
 
@@ -22,7 +23,7 @@ class FilmsApplicationTests {
 
 	@Test
 	public void testCreateFilm() {
-		Film f = new Film("The Godfather", "Crime", 175.0, new Date(72, 2, 24));
+		Film f = new Film("The Godfather", 175.0, new Date(72, 2, 24));
 		filmRepository.save(f);
 	}
 
@@ -68,5 +69,70 @@ class FilmsApplicationTests {
 	System.out.println(p); 
 	} */
 	}
+	
+	@Test
+	public void testFindFilmByNom() {
+		List<Film> films = filmRepository.findByNomFilm("Joker");
+		for (Film f : films) {
+			System.out.println(f);
+		}
+	}
+	
+	@Test
+	public void testFindFilmByNomContains() {
+		List<Film> films = filmRepository.findByNomFilmContains("a");
+		for (Film f : films) {
+			System.out.println(f);
+		}
+	}
+	
+	@Test
+	public void testfindByNomDuree() 
+	{ 
+		List<Film>  films = filmRepository.findByNomDuree("Matrix", 10.0); 
+		for (Film f : films) 
+		{ 
+			System.out.println(f); 
+		} 
+	}
+	
+	@Test 
+	public void testfindByGenre() 
+	{ 
+		Genre gen = new Genre(); 
+		gen.setIdG(1L);    
+		List<Film>  films = filmRepository.findByGenre(gen); 
+		for (Film f : films) 
+		{ 
+			System.out.println(f); 
+		} 
+	} 
+	
+	@Test
+	public void findByGenreIdG() {
+		List<Film> films = filmRepository.findByGenreIdG(1L);
+		for (Film f : films) {
+			System.out.println(f);
+		}
+	}
+	
+	@Test
+	public void testfindByOrderByNomFilmAsc() {
+		List<Film> films = filmRepository.findByOrderByNomFilmAsc();
+		for (Film f : films) {
+			System.out.println(f);
+		}
+	}
+	
+	@Test 
+	 public void testTrierFilmsNomsDuree() 
+	  { 
+	  List<Film>  films = filmRepository.trierFilmsNomsDuree();
+	   
+	   for (Film f : films) 
+	   { 
+	    System.out.println(f); 
+	   } 
+	  }
 
 }

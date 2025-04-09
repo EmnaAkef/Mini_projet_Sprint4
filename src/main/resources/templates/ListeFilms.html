@@ -22,14 +22,12 @@ href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
 					<tr>
 						<th>ID</th>
 						<th>Nom Film</th>
-						<th>Genre</th>
 						<th>Duree</th>
 						<th>Date Sortie</th>
 					</tr>
 					<tr th:each="f:${films.content}">
 						<td th:text="${f.idFilm}"></td>
 						<td th:text="${f.nomFilm}"></td>
-						<td th:text="${f.genre}"></td>
 						<td th:text="${f.duree}"></td>
 						<td th:text="${f.dateSortie}"></td>
 						<td><a class="btn btn-success" th:href="@{modifierFilm(id=${f.idFilm}, page=${currentPage},size=${size})}">Editer</a></td>

@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Film {
@@ -14,9 +15,12 @@ public class Film {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long idFilm;
 	private String nomFilm;
-	private String genre;
 	private Double duree;
 	private Date dateSortie;
+	
+	@ManyToOne
+	private Genre genre;
+	
 	public Long getIdFilm() {
 		return idFilm;
 	}
@@ -28,12 +32,6 @@ public class Film {
 	}
 	public void setNomFilm(String nomFilm) {
 		this.nomFilm = nomFilm;
-	}
-	public String getGenre() {
-		return genre;
-	}
-	public void setGenre(String genre) {
-		this.genre = genre;
 	}
 	public Double getDuree() {
 		return duree;
@@ -49,19 +47,23 @@ public class Film {
 	}
 	public Film() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public Film(String nomFilm, String genre, Double duree, Date dateSortie) {
+	public Film(String nomFilm, Double duree, Date dateSortie) {
 		super();
 		this.nomFilm = nomFilm;
-		this.genre = genre;
 		this.duree = duree;
 		this.dateSortie = dateSortie;
 	}
 	@Override
 	public String toString() {
-		return "Film [idFilm=" + idFilm + ", nomFilm=" + nomFilm + ", genre=" + genre + ", duree=" + duree
+		return "Film [idFilm=" + idFilm + ", nomFilm=" + nomFilm + ", duree=" + duree
 				+ ", dateSortie=" + dateSortie + "]";
+	}
+	public Genre getGenre() {
+		return genre;
+	}
+	public void setGenre(Genre genre) {
+		this.genre = genre;
 	}
 	
 }

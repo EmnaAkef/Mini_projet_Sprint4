@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.emna.films.service.FilmService;
 import com.emna.films.entities.Film;
+import com.emna.films.entities.Genre;
 import com.emna.films.repos.FilmRepository;
 
 
@@ -53,6 +54,41 @@ public class FilmServiceImpl implements FilmService{
 	@Override
 	public Page<Film> getAllFilmsParPage(int page, int size) {
 		return filmRepository.findAll(PageRequest.of(page, size));
+	}
+
+	@Override
+	public List<Film> findByNomProduit(String nom) {
+		return filmRepository.findByNomFilm(nom); 
+	}
+
+	@Override
+	public List<Film> findByNomFilmContains(String nom) {
+		return filmRepository.findByNomFilmContains(nom); 
+	}
+
+	@Override
+	public List<Film> findByNomDuree(String nom, Double duree) {
+		return filmRepository.findByNomDuree(nom, duree);
+	}
+
+	@Override
+	public List<Film> findByGenre(Genre genre) {
+		return filmRepository.findByGenre(genre); 
+	}
+
+	@Override
+	public List<Film> findByGenreIdG(Long id) {
+		return filmRepository.findByGenreIdG(id); 
+	}
+
+	@Override
+	public List<Film> findByOrderByNomFilmAsc() {
+		return filmRepository.findByOrderByNomFilmAsc();
+	}
+
+	@Override
+	public List<Film> trierFilmsNomsDuree() {
+		return filmRepository.trierFilmsNomsDuree();
 	}
 	
 }
