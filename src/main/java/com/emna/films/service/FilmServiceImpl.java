@@ -11,6 +11,7 @@ import com.emna.films.service.FilmService;
 import com.emna.films.entities.Film;
 import com.emna.films.entities.Genre;
 import com.emna.films.repos.FilmRepository;
+import com.emna.films.repos.GenreRepository;
 
 
 @Service
@@ -18,6 +19,9 @@ public class FilmServiceImpl implements FilmService{
 
 	@Autowired
 	FilmRepository filmRepository;
+	
+	@Autowired
+	GenreRepository genreRepository;
 	
 	@Override
 	public Film saveFilm(Film f) {
@@ -89,6 +93,11 @@ public class FilmServiceImpl implements FilmService{
 	@Override
 	public List<Film> trierFilmsNomsDuree() {
 		return filmRepository.trierFilmsNomsDuree();
+	}
+
+	@Override
+	public List<Genre> getAllGenres() {
+		return genreRepository.findAll();
 	}
 	
 }

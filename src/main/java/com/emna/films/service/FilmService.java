@@ -23,4 +23,5 @@ public interface FilmService {
 	List<Film> findByGenreIdG(Long id); 
 	List<Film> findByOrderByNomFilmAsc(); 
 	List<Film> trierFilmsNomsDuree(); 
+	List<Genre> getAllGenres();
 }
