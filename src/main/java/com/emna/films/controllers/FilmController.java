@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.emna.films.dto.FilmDTO;
 import com.emna.films.entities.Film;
 import com.emna.films.entities.Genre;
 import com.emna.films.service.FilmService;
@@ -59,7 +60,7 @@ public class FilmController {
 	}
 
 	@RequestMapping("/saveFilm")
-	public String saveFilm(@Valid Film film, BindingResult bindingResult,
+	public String saveFilm(@Valid FilmDTO film, BindingResult bindingResult,
 			@RequestParam (name="page",defaultValue = "0") int page,
 			@RequestParam (name="size", defaultValue = "2") int size)
 	{
@@ -102,7 +103,7 @@ public class FilmController {
 	public String editerFilm(@RequestParam("id") Long id, ModelMap modelMap,
 			@RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "2") int size) {
-		Film f = filmService.getFilm(id);
+		FilmDTO f = filmService.getFilm(id);
 		List<Genre> gens = filmService.getAllGenres();
 		modelMap.addAttribute("film", f);
 		modelMap.addAttribute("mode", "edit");
@@ -113,15 +114,15 @@ public class FilmController {
 	}
 
 	@RequestMapping("/updateFilm")
-	public String updateFilm(@ModelAttribute("film") Film film, @RequestParam("date") String date, ModelMap modelMap)
+	public String updateFilm(@ModelAttribute("film") FilmDTO film, @RequestParam("date") String date, ModelMap modelMap)
 			throws ParseException {
 		// conversion de la date
 		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
 		Date dateSortie = dateformat.parse(String.valueOf(date));
-		film.setDateSortie(dateSortie);
+		film.setDateSortie((java.sql.Date) dateSortie);
 
 		filmService.updateFilm(film);
-		List<Film> films = filmService.getAllFilms();
+		List<FilmDTO> films = filmService.getAllFilms();
 		modelMap.addAttribute("films", films);
 		return "listeFilms";
 	}

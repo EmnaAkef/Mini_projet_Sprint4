@@ -4,17 +4,20 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.emna.films.dto.FilmDTO;
 import com.emna.films.entities.Film;
 import com.emna.films.entities.Genre;
 
 public interface FilmService {
 
-	Film saveFilm(Film f);
-	Film updateFilm(Film f);
+	FilmDTO saveFilm(FilmDTO f);
+	FilmDTO getFilm(Long id);
+	List<FilmDTO> getAllFilms();
+	
+	FilmDTO updateFilm(FilmDTO f);
 	void deleteFilm(Film f);
 	 void deleteFilmById(Long id);
-	 Film getFilm(Long id);
-	List<Film> getAllFilms();
+	 
 	Page<Film> getAllFilmsParPage(int page, int size);
 	List<Film> findByNomProduit(String nom); 
 	List<Film> findByNomFilmContains(String nom); 
@@ -24,4 +27,7 @@ public interface FilmService {
 	List<Film> findByOrderByNomFilmAsc(); 
 	List<Film> trierFilmsNomsDuree(); 
 	List<Genre> getAllGenres();
+	
+	FilmDTO convertEntityToDto (Film film); 
+	Film convertDtoToEntity(FilmDTO filmDto);
 }

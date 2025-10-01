@@ -41,7 +41,7 @@ href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
 						 page=${currentPage},size=${size})}">Supprimer</a> 
 						 </td>  
 						 <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" 
-						 th:href="@{modifierFilm(id=${f.idFilm})}">Editer</a></td> 
+						 th:href="@{modifierFilm(id=${f.idFilm},page=${currentPage},size=${size})}">Editer</a></td> 
 					</tr>
 				</table>
 				<ul class="nav nav-pills">
